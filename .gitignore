@@ -1,4 +1,5 @@
 .installed.cfg
+.mr.developer*
 bin/
 build/
 include/
@@ -13,3 +14,6 @@ dist
 .tox
 .coverage
 .coverage.*
+src/*
+.pytest*
+pip*

@@ -2,8 +2,8 @@ modules:
   input:
     module: wishbone.module.input.couchdbpoller
     arguments:
-      couchdb_url: "{{ couchdb_from_url }}"
-      seqfile: {{ parts.buildout.directory }}/var/seqfile
+      couchdb_url: ""
+      seqfile: /home/yshalenyk/work/op/ocds-api/openprocurement.ocds.buildout/var/seqfile
   
   fanout:
     module: wishbone.module.flow.fanout
@@ -11,14 +11,14 @@ modules:
   export:
     module: wishbone.module.process.galleon
     arguments:
-      schema: {{ schema }}
-      mapping: {{ mapping }}
+      schema: 
+      mapping: 
       tagger: ocds
 
   output:
     module: wishbone.module.output.couchdbpuller
     arguments:
-      couchdb_url: "{{ couchdb_to_url }}"
+      couchdb_url: ""
 
 routingtable:
   - input.outbox -> export.inbox
