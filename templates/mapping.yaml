@@ -8,6 +8,8 @@ mapping:
     src: id
   ocid:
     src: tenderID
+    transforms:
+    - "ocds-be6bcu"+.
   date:
     src: dateModified
   language:
