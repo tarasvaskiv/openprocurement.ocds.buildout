@@ -15,11 +15,21 @@ modules:
       mapping: {{ mapping }}
       tagger: ocds
 
+  filter:
+    module: wishbone.module.flow.couchdbfilter
+    arguments:
+      couchdb_url: "{{ couchdb_to_url }}"
+      view_path: "{{ filter_view }}"
+      filter_key: '{{ filter_key }}'
+      filter_value: "{{ filter_value }}"
+      op: "{{ filter_op }}"
+
   output:
     module: wishbone.module.output.couchdbpuller
     arguments:
       couchdb_url: "{{ couchdb_to_url }}"
 
 routingtable:
-  - input.outbox -> export.inbox
-  - export.outbox   -> output.inbox  
+  - input.outbox -> filter.inbox
+  - filter.outbox -> export.inbox
+  - export.outbox -> output.inbox  
