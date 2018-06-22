@@ -3,8 +3,8 @@ modules:
     module: wishbone.module.input.couchdbpoller
     arguments:
       couchdb_url: "{{ couchdb_from_url }}"
-      seqfile: {{ parts.buildout.directory }}/var/seqfile
-  
+      seqfile: {{ parts.buildout.directory }}/var/neoj4seqfile
+
   fanout:
     module: wishbone.module.flow.fanout
 
@@ -43,9 +43,12 @@ modules:
         expression: '.[0].value < .[1].dateModified'
 
   output:
-    module: wishbone.module.output.couchdbpush
+    module: wishbone.module.output.neo4jpush
     arguments:
-      couchdb_url: "{{ couchdb_to_url }}"
+      host: "{{ neo4j_host }}"
+      port: "{{ neo4j_port }}"
+      user: "{{ neo4j_user }}"
+      password: "{{ neo4j_password }}"
 
 
 routingtable:
